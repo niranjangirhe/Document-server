@@ -47,27 +47,29 @@ function logout() {
 }
 
 firebase.auth().onAuthStateChanged((user) => {
+    var B1 = document.getElementById("loginB1");
+    var B2 = document.getElementById("loginB2");
+    var logout = document.getElementById("logout");
+    var downloader = document.getElementById("downloader");
     if (user) {
-        var B1 = document.getElementById("loginB1");
-        var B2 = document.getElementById("loginB2");
-        var logout = document.getElementById("logout");
+       
 
 
         logout.style.display = "block";
         B1.style.display = "none";
         B2.style.display = "none";
+        downloader.style.display = "block";
 
         loadDoc();
 
     } else {
-        var B1 = document.getElementById("loginB1");
-        var B2 = document.getElementById("loginB2");
-        var logout = document.getElementById("logout");
+       
 
 
         logout.style.display = "none";
         B1.style.display = "block";
         B2.style.display = "block";
+        downloader.style.display = "none";
     }
 });
 
@@ -81,7 +83,7 @@ function loadDoc() {
             DocList.innerHTML += `<option value="` + doc.data().link + `">` + doc.data().name + `</option>`
         });
     });
-
+    
 }
 
 function download() {
