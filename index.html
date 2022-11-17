@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet">
+    <title>Document</title>
+
+    </head>
+
+<body class="bg-gray-900">
+
+    <button onclick="toggle()" style="z-index: 100; position: fixed; right:30px; bottom: 30px;" class="p-0 w-14 h-14 bg-red-500 rounded-full hover:bg-red-700 active:shadow-lg mouse shadow transition ease-in duration-200 focus:outline-none">
+        <svg viewBox="0 0 20 20" enable-background="new 0 0 20 20" class="w-6 h-6 inline-block">
+          <path fill="#FFFFFF" d="M16,10c0,0.553-0.048,1-0.601,1H11v4.399C11,15.951,10.553,16,10,16c-0.553,0-1-0.049-1-0.601V11H4.601
+                                        C4.049,11,4,10.553,4,10c0-0.553,0.049-1,0.601-1H9V4.601C9,4.048,9.447,4,10,4c0.553,0,1,0.048,1,0.601V9h4.399
+                                        C15.952,9,16,9.447,16,10z"></path>
+        </svg>
+      </button>
+      <style>
+        #loader {
+          position: fixed;
+          z-index: 1000;
+          width: 100%;
+          height: 100vh;
+          background: #111827 url("/loader.gif") no-repeat center;
+          background-size: 30%;
+        }
+    
+        fadeinout-animate {
+          width: 200px;
+          height: 200px;
+          background: red;
+          opacity: 0;
+        }
+    
+        @keyframes fadeinout {
+          0% {
+            opacity: 1;
+            z-Index: 50;
+          }
+    
+          100% {
+            opacity: 0;
+            z-Index: -1;
+          }
+        }
+    
+        @keyframes fadeoutin {
+          0% {
+            opacity: 0;
+          }
+    
+          100% {
+            opacity: 1;
+          }
+        }
+      </style>
+
+
+    <header class="text-gray-400 bg-gray-900 body-font">
+      <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
+        <a class="flex title-font font-medium items-center text-white mb-4 md:mb-0">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-red-500 rounded-full" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="ml-3 text-xl">NG Document Server</span>
+        </a>
+        <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
+        </nav>
+        <button id="logout" class="inline-flex items-center bg-gray-800 border-0 py-1 px-3 focus:outline-none hover:bg-gray-700 rounded text-base mt-4 md:mt-0" onclick="logout()">Logout
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"></path>
+          </svg>
+        </button>
+      </div>
+    </header>
+    <section class="text-gray-400 body-font relative">
+        <div class="container px-5 py-24 mx-auto">
+            <div class="flex flex-col text-center w-full mb-12">
+                <h1 class="sm:text-3xl text-2xl font-medium title-font mb-4 text-white">Welcome</h1>
+                <p class="lg:w-2/3 mx-auto leading-relaxed text-base">Your all Document at one place</p>
+            </div>
+            <div class="lg:w-1/3 md:w-2/3 mx-auto">
+                <div class="p-2 w-full" id="loginB1">
+                    <div class="relative">
+                        <label for="email" class="leading-7 text-sm text-gray-400">Password</label>
+                        <input type="password" id="password" name="password"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-red-500 focus:bg-gray-900 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                    </div>
+                </div>
+
+                <div class="p-2 w-full" id="loginB2">
+                    <button
+                        class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg" onclick="login()">Login</button>
+                </div>
+            </div>
+            <div class="lg:w-1/3 md:w-2/3 mx-auto" id="downloader">
+                <div class="flex flex-wrap -m-2">
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="name" class="leading-7 text-sm text-gray-400">Document Name</label>
+                            <select name="cars" id="DocList"
+                                class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-red-500 focus:bg-gray-900 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-2 px-3 leading-8 transition-colors duration-200 ease-in-out">
+
+                            </select>
+                        </div>
+                    </div>
+                    <div class="p-2 w-full" id="download">
+                        <button
+                            class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg" onclick="download()">Download</button>
+                    </div>
+                    
+
+                </div>
+            </div>
+            <div class="lg:w-1/3 md:w-2/3 mx-auto" id="uploader">
+                <div class="flex flex-wrap -m-2">
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="name" class="leading-7 text-sm text-gray-400">Document Name</label>
+                            <input type="text" id="name" name="name"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-red-500 focus:bg-gray-900 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-full">
+                        <div class="relative">
+                            <label for="name" class="leading-7 text-sm text-gray-400">Document File</label>
+                            <input type="file" id="file" name="file"
+                            class="w-full bg-gray-800 bg-opacity-40 rounded border border-gray-700 focus:border-red-500 focus:bg-gray-900 focus:ring-2 focus:ring-red-900 text-base outline-none text-gray-100 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out">
+                        </div>
+                    </div>
+                    <div class="p-2 w-full" id="upload">
+                        <button
+                            id="upProgress" class="flex mx-auto text-white bg-red-500 border-0 py-2 px-8 focus:outline-none hover:bg-red-600 rounded text-lg" onclick="upload()">Upload</button>
+                    </div>
+                    
+
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-storage.js"></script>
+    <script>
+        // Import the functions you need from the SDKs you need
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyBAnapllyQ6LAYCOfHulu8fnfR7Sq1r9Dc",
+            authDomain: "ngdocumentserver.firebaseapp.com",
+            projectId: "ngdocumentserver",
+            storageBucket: "ngdocumentserver.appspot.com",
+            messagingSenderId: "316071131857",
+            appId: "1:316071131857:web:62816fc3c9a10ac0eb63f0",
+            measurementId: "G-4RH7B097W2"
+        };
+
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    <script src="main.js"></script>
+    
+</body>
+
+</html>
